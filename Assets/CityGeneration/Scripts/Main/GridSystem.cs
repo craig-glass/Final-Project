@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Diagnostics;
 
 public class GridSystem : MonoBehaviour
 {
+    Stopwatch Timer = new Stopwatch();
     public GameObject straight;
     public GameObject crossroads;
     public GameObject deadEnd;
@@ -15,6 +17,8 @@ public class GridSystem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Timer.Start();
+
         for (int z = 0; z < depth; z += 20)
         {
             for (int x = 0; x < width; x += 20)
@@ -31,6 +35,9 @@ public class GridSystem : MonoBehaviour
                 //r = Instantiate(straight, pos, Quaternion.Euler(0, 90, 0));
             }
         }
+        Timer.Stop();
+        UnityEngine.Debug.Log("Time taken grid system: " + Timer.Elapsed);
+        UnityEngine.Debug.Log("Time taken grid system: " + Timer.ElapsedMilliseconds);
     }
 
 

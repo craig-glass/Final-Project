@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Diagnostics;
 
 public class GenerateCubes : MonoBehaviour
 {
+    Stopwatch Timer = new Stopwatch();
+
     public GameObject cubePrefab;
 
     float xAxis = 4.5f;
@@ -14,7 +17,7 @@ public class GenerateCubes : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        InstantiateCubes(500);
+        InstantiateCubes(1000);
     }
 
     // Update is called once per frame
@@ -25,7 +28,9 @@ public class GenerateCubes : MonoBehaviour
 
     void InstantiateCubes(int quantity)
     {
+        Timer.Start();
         MeshUtils.GenerateVoronoi(20, quantity, quantity);
+        
 
         for (int x = 10; x < quantity; x+= 20)
         {
@@ -62,6 +67,10 @@ public class GenerateCubes : MonoBehaviour
             }
             //zAxis -= spacing;
             //xAxis = 10.0f;
-        }    
+        }
+
+        Timer.Stop();
+        UnityEngine.Debug.Log("Instantiate Cubes time taken: " + Timer.Elapsed);
+        UnityEngine.Debug.Log("Instantiate Cubes time taken: " + Timer.ElapsedMilliseconds);
     }
 }

@@ -123,6 +123,141 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &106354977
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 106354979}
+  - component: {fileID: 106354978}
+  m_Layer: 0
+  m_Name: Stats
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &106354978
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 106354977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4ff4051e75dc9443879b116bd65c930, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fpsCounter:
+    enabled: 1
+    anchor: 0
+    color: {r: 0.33333334, g: 0.85490197, b: 0.4, a: 1}
+    style: 1
+    updateInterval: 0.5
+    warningLevelValue: 50
+    criticalLevelValue: 20
+    resetAverageOnNewScene: 1
+    resetMinMaxOnNewScene: 1
+    minMaxIntervalsToSkip: 3
+    realtimeFPSFoldout: 0
+    realtimeFPS: 1
+    milliseconds: 1
+    averageFoldout: 0
+    average: 1
+    averageMilliseconds: 1
+    averageNewLine: 1
+    averageSamples: 50
+    minMaxFoldout: 0
+    minMax: 1
+    minMaxMilliseconds: 0
+    minMaxNewLine: 1
+    minMaxTwoLines: 0
+    renderFoldout: 0
+    render: 1
+    renderNewLine: 1
+    renderAutoAdd: 1
+    colorWarning: {r: 0.9254902, g: 0.8784314, b: 0.34509805, a: 1}
+    colorCritical: {r: 0.9764706, g: 0.35686275, b: 0.35686275, a: 1}
+    colorRender: {r: 0.654902, g: 0.43137255, b: 0.81960785, a: 1}
+  memoryCounter:
+    enabled: 1
+    anchor: 0
+    color: {r: 0.91764706, g: 0.93333334, b: 0.39607844, a: 1}
+    style: 1
+    updateInterval: 0.5
+    precise: 1
+    total: 1
+    allocated: 1
+    monoUsage: 0
+    gfx: 1
+  deviceInfoCounter:
+    enabled: 1
+    anchor: 2
+    color: {r: 0.6745098, g: 0.6745098, b: 0.6745098, a: 1}
+    style: 0
+    platform: 1
+    cpuModel: 1
+    cpuModelNewLine: 1
+    gpuModel: 1
+    gpuModelNewLine: 1
+    gpuApi: 1
+    gpuApiNewLine: 1
+    gpuSpec: 1
+    gpuSpecNewLine: 1
+    ramSize: 1
+    ramSizeNewLine: 1
+    screenData: 1
+    screenDataNewLine: 1
+    deviceModel: 0
+    deviceModelNewLine: 1
+  hotKey: 96
+  circleGesture: 0
+  hotKeyCtrl: 0
+  hotKeyShift: 0
+  hotKeyAlt: 0
+  keepAlive: 1
+  operationMode: 2
+  forceFrameRate: 0
+  forcedFrameRate: 59
+  background: 1
+  backgroundColor: {r: 0, g: 0, b: 0, a: 0.60784316}
+  backgroundPadding: 5
+  shadow: 0
+  shadowColor: {r: 0, g: 0, b: 0, a: 0.5019608}
+  shadowDistance: {x: 1, y: -1}
+  outline: 0
+  outlineColor: {r: 0, g: 0, b: 0, a: 0.5019608}
+  outlineDistance: {x: 1, y: -1}
+  autoScale: 0
+  scaleFactor: 1
+  labelsFont: {fileID: 0}
+  fontSize: 14
+  lineSpacing: 1
+  countersSpacing: 0
+  paddingOffset: {x: 5, y: 5}
+  pixelPerfect: 1
+  sortingOrder: 10000
+  lookAndFeelFoldout: 0
+  advancedFoldout: 0
+--- !u!4 &106354979
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 106354977}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3.8083878, y: -525.1336, z: 691.74207}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -293,14 +428,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: -0.29236954, y: -0.7007662, z: 0.39788163, w: -0.51491463}
-  m_LocalPosition: {x: -178.10472, y: 248.59059, z: 50.85813}
+  m_LocalRotation: {x: 0.1654117, y: 0.6874875, z: -0.1654117, w: 0.6874875}
+  m_LocalPosition: {x: -137.9, y: 98.3, z: 96.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 27.057, y: 90, z: 0}
 --- !u!1 &1640505496
 GameObject:
   m_ObjectHideFlags: 0
@@ -477,7 +612,7 @@ MonoBehaviour:
   - {fileID: 919132149155446097, guid: 43d769e5f862643e99ac589ee6aa9821, type: 3}
   - {fileID: 919132149155446097, guid: 099cb1901ff95481bb82e5a156e5213c, type: 3}
   park: {fileID: 2076683445006418026, guid: 8e97e73d9d5cb448886d336c474d8141, type: 3}
-  numberOfCrawls: 400
+  numberOfCrawls: 500
 --- !u!4 &1922227214
 Transform:
   m_ObjectHideFlags: 0

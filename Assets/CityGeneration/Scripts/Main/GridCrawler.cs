@@ -1,13 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Diagnostics;
 
 public class GridCrawler : MonoBehaviour
 {
+    Stopwatch Timer = new Stopwatch();
+    bool calculateTotalTime = true;
+
     public GameObject crawler;
     int width = 500;
     int depth = 500;
-    int crawlCount = 300;
+    int crawlCount = 100;
     Vector3Int crawlerPos;
 
     // Start is called before the first frame update
@@ -25,10 +29,18 @@ public class GridCrawler : MonoBehaviour
             Crawl();
             crawlCount--;
         }
+        else if (crawlCount == 0 && calculateTotalTime)
+        {
+            UnityEngine.Debug.Log("Crawler time taken: " + Timer.Elapsed);
+            UnityEngine.Debug.Log("Crawler time taken: " + Timer.ElapsedMilliseconds);
+            calculateTotalTime = false;
+        }
     }
 
     void Crawl()
     {
+        Timer.Start();
+
         int dx = Random.Range(-1, 2);
         int dz = Random.Range(-1, 2);
 
@@ -44,5 +56,7 @@ public class GridCrawler : MonoBehaviour
         }
 
         crawler.transform.position = crawlerPos;
+
+        Timer.Stop();
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using System.Linq;
+using System.Diagnostics;
 
 class RoadPiece : IEquatable<RoadPiece>
 {
@@ -21,6 +22,9 @@ class RoadPiece : IEquatable<RoadPiece>
 
 public class CityGenerator : MonoBehaviour
 {
+    Stopwatch Timer = new Stopwatch();
+    Stopwatch MethodTimer = new Stopwatch();
+
     public GameObject crawler;
     public GameObject straight;
     public GameObject corner;
@@ -88,7 +92,8 @@ public class CityGenerator : MonoBehaviour
         }
 
         UnityEditor.EditorUtility.DisplayProgressBar("Generating City", "Drawing Roads", progress);
-        StartCoroutine(Crawl());
+        Crawl();
+
     }
 
     void AddNoDuplicates(RoadPiece newPiece)
@@ -192,13 +197,14 @@ public class CityGenerator : MonoBehaviour
         return Physics.Raycast(gridPos + new Vector3Int(0, -5, 0), Vector3.up, out hitUp, 10, roadMask);
     }
 
-    IEnumerator Crawl()
+    void Crawl()
     {
+        MethodTimer.Start();
+
         int crawlCount = 0;
 
         while (crawlCount < numberOfCrawls)
         {
-            Debug.Log("crawl count: " + crawlCount);
             crawlCount++;
             UnityEditor.EditorUtility.DisplayProgressBar("Generating City", "Drawing Roads", progress += 0.005f);
 
@@ -247,7 +253,7 @@ public class CityGenerator : MonoBehaviour
 
             AddNoDuplicates(newRoad);
 
-            yield return null;
+            //yield return null;
 
             for (int i = 0; i <= 20; i++)
             {
@@ -270,7 +276,7 @@ public class CityGenerator : MonoBehaviour
 
             CheckOutOfBounds();
 
-            yield return null;
+            //yield return null;
         }
 
         UnityEditor.EditorUtility.DisplayProgressBar("Generating City", "Fixing Roads", progress += 0.005f);
@@ -279,7 +285,13 @@ public class CityGenerator : MonoBehaviour
         CleanUpDeadEnds();
         UnityEditor.EditorUtility.ClearProgressBar();
 
-        UnityEditor.EditorUtility.DisplayProgressBar("Generating City", "Building Houses", progress += 0.005f);
+        //UnityEditor.EditorUtility.DisplayProgressBar("Generating City", "Building Houses", progress += 0.005f);
+
+        MethodTimer.Stop();
+        UnityEngine.Debug.Log("Crawl method time taken: " + MethodTimer.Elapsed);
+        UnityEngine.Debug.Log("Crawl method time taken: " + MethodTimer.ElapsedMilliseconds);
+        MethodTimer.Reset();
+
         Invoke("BuildHouses", 0.1f);
     }
 
@@ -300,6 +312,8 @@ public class CityGenerator : MonoBehaviour
 
     void BuildHouses()
     {
+        MethodTimer.Start();
+
         MeshUtils.GenerateVoronoi(6, maxDimensions.x + Mathf.Abs(minDimensions.x) + 20, maxDimensions.z + Mathf.Abs(minDimensions.z) + 20);
 
         for (int z = minDimensions.z - 10; z < maxDimensions.z + 10; z++)
@@ -453,6 +467,12 @@ public class CityGenerator : MonoBehaviour
         AddFillers(0, ZoneType.R);
         AddFillers(1, ZoneType.C);
         AddFillers(2, ZoneType.I);
+
+        MethodTimer.Stop();
+        UnityEngine.Debug.Log("Build houses time taken: " + MethodTimer.Elapsed);
+        UnityEngine.Debug.Log("Build houses time taken: " + MethodTimer.ElapsedMilliseconds);
+        MethodTimer.Reset();
+
         CleanUpDeadEnds();
         UnityEditor.EditorUtility.ClearProgressBar();
     }
@@ -479,6 +499,8 @@ public class CityGenerator : MonoBehaviour
 
     void AddFillers(int modelId, ZoneType type)
     {
+        Timer.Start();
+
         List<Mesh> meshes = new List<Mesh>();
         List<Vector3> mPositions = new List<Vector3>();
         GameObject go = null;
@@ -567,5 +589,8 @@ public class CityGenerator : MonoBehaviour
 
 
         }
+
+        Timer.Stop();
+        UnityEngine.Debug.Log("AddFillers time taken: " + Timer.Elapsed);
     }
 }

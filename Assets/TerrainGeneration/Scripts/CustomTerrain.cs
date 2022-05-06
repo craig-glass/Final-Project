@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using System.Linq;
+using System.Diagnostics;
 
 [ExecuteInEditMode]
 
 public class CustomTerrain : MonoBehaviour
 {
+    Stopwatch Timer = new Stopwatch();
+
     public Vector2 randomHeightRange = new Vector2(0, 0.1f);
     public Terrain terrain;
     public TerrainData terrainData;
@@ -126,6 +129,8 @@ public class CustomTerrain : MonoBehaviour
 
     public void MidPointDisplacement()
     {
+        Timer.Start();
+
         float[,] heightMap = GetHeightMap();
         int width = terrainData.heightmapResolution - 1;
         int squareSize = width;
@@ -211,10 +216,17 @@ public class CustomTerrain : MonoBehaviour
 
 
         terrainData.SetHeights(0, 0, heightMap);
+
+        Timer.Stop();
+        UnityEngine.Debug.Log("Midpoint Displacement time taken: " + Timer.Elapsed);
+        UnityEngine.Debug.Log("Midpoint Displacement time taken: " + Timer.ElapsedMilliseconds);
+        Timer.Reset();
     }
 
     public void SmoothTerrain()
     {
+        Timer.Start();
+
         float[,] heightMap = terrainData.GetHeights(0, 0, terrainData.heightmapResolution, terrainData.heightmapResolution);
         float smoothProgress = 0;
         EditorUtility.DisplayProgressBar("Smoothing Terrain", "Progress", smoothProgress);
@@ -281,10 +293,16 @@ public class CustomTerrain : MonoBehaviour
 
         terrainData.SetHeights(0, 0, heightMap);
         EditorUtility.ClearProgressBar();
+        Timer.Stop();
+        UnityEngine.Debug.Log("Smoothing time taken: " + Timer.Elapsed);
+        UnityEngine.Debug.Log("Smoothing time taken: " + Timer.ElapsedMilliseconds);
+        Timer.Reset();
     }
 
     public void VoronoiTessellation()
     {
+        Timer.Start();
+
         float[,] heightMap = GetHeightMap();
 
         for (int i = 0; i < peakCount; i++)
@@ -332,10 +350,16 @@ public class CustomTerrain : MonoBehaviour
             }
         }
         terrainData.SetHeights(0, 0, heightMap);
+        Timer.Stop();
+        UnityEngine.Debug.Log("Voronoi Tessellation time taken: " + Timer.Elapsed);
+        UnityEngine.Debug.Log("Voronoi Tessellation time taken: " + Timer.ElapsedMilliseconds);
+        Timer.Reset();
     }
 
     public void Perlin()
     {
+        Timer.Start();
+
         float[,] heightMap = GetHeightMap();
 
         for (int y = 0; y < terrainData.heightmapResolution; y++)
@@ -347,10 +371,17 @@ public class CustomTerrain : MonoBehaviour
         }
 
         terrainData.SetHeights(0, 0, heightMap);
+
+        Timer.Stop();
+        UnityEngine.Debug.Log("Perlin time taken: " + Timer.Elapsed);
+        UnityEngine.Debug.Log("Perlin time taken: " + Timer.ElapsedMilliseconds);
+        Timer.Reset();
     }
 
     public void MultiplePerlinTerrain()
     {
+        Timer.Start();
+
         float[,] heightMap = GetHeightMap();
         for (int y = 0; y < terrainData.heightmapResolution; y++)
         {
@@ -366,6 +397,11 @@ public class CustomTerrain : MonoBehaviour
             }
         }
         terrainData.SetHeights(0, 0, heightMap);
+
+        Timer.Stop();
+        UnityEngine.Debug.Log("Multiple Perlin time taken: " + Timer.Elapsed);
+        UnityEngine.Debug.Log("Multiple Perlin time taken: " + Timer.ElapsedMilliseconds);
+        Timer.Reset();
     }
 
     public void AddNewPerlin()
@@ -411,6 +447,8 @@ public class CustomTerrain : MonoBehaviour
 
     public void SplatMaps()
     {
+        Timer.Start();
+
         TerrainLayer[] newSplatPrototypes;
         newSplatPrototypes = new TerrainLayer[splatHeights.Count];
         int spindex = 0;
@@ -459,6 +497,11 @@ public class CustomTerrain : MonoBehaviour
             }
         }
         terrainData.SetAlphamaps(0, 0, splatmapData);
+
+        Timer.Stop();
+        UnityEngine.Debug.Log("Splatmaps time taken: " + Timer.Elapsed);
+        UnityEngine.Debug.Log("Splatmaps time taken: " + Timer.ElapsedMilliseconds);
+        Timer.Reset();
     }
 
     void NormalizeVector(float[] v)
@@ -499,6 +542,8 @@ public class CustomTerrain : MonoBehaviour
 
     public void PlantVegetation()
     {
+        Timer.Start();
+
         TreePrototype[] newTreePrototypes;
         newTreePrototypes = new TreePrototype[vegetation.Count];
         int tindex = 0;
@@ -575,6 +620,10 @@ public class CustomTerrain : MonoBehaviour
         }
     TREESDONE:
         terrainData.treeInstances = allVegetation.ToArray();
+        Timer.Stop();
+        UnityEngine.Debug.Log("Vegetation time taken: " + Timer.Elapsed);
+        UnityEngine.Debug.Log("Vegetation time taken: " + Timer.ElapsedMilliseconds);
+        Timer.Reset();
     }
 
     public void AddNewVegetation()
@@ -602,6 +651,8 @@ public class CustomTerrain : MonoBehaviour
 
     public void LoadTexture()
     {
+        Timer.Start();
+
         float[,] heightMap;
         heightMap = GetHeightMap();
 
@@ -614,10 +665,17 @@ public class CustomTerrain : MonoBehaviour
         }
 
         terrainData.SetHeights(0, 0, heightMap);
+
+        Timer.Stop();
+        UnityEngine.Debug.Log("Load texture time taken: " + Timer.Elapsed);
+        UnityEngine.Debug.Log("Load texture time taken: " + Timer.ElapsedMilliseconds);
+        Timer.Reset();
     }
 
     public void RandomTerrain()
     {
+        Timer.Start();
+
         float[,] heightMap = GetHeightMap();
         for (int x = 0; x < terrainData.heightmapResolution; x++)
         {
@@ -628,6 +686,11 @@ public class CustomTerrain : MonoBehaviour
         }
 
         terrainData.SetHeights(0, 0, heightMap);
+
+        Timer.Stop();
+        UnityEngine.Debug.Log("Random terrain time taken: " + Timer.Elapsed);
+        UnityEngine.Debug.Log("Random terrain time taken: " + Timer.ElapsedMilliseconds);
+        Timer.Reset();
     }
 
     public void ResetHeights()
@@ -648,7 +711,7 @@ public class CustomTerrain : MonoBehaviour
 
     private void OnEnable()
     {
-        Debug.Log("Initialising Terrain Data");
+        UnityEngine.Debug.Log("Initialising Terrain Data");
         terrain = GetComponent<Terrain>();
         terrainData = Terrain.activeTerrain.terrainData;
     }
