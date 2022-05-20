@@ -144,6 +144,7 @@ public class CustomTerrain : MonoBehaviour
 
         while (squareSize > 0)
         {
+            // diamond step
             for (int x = 0; x < width; x += squareSize)
             {
                 for (int y = 0; y < width; y += squareSize)
@@ -163,6 +164,7 @@ public class CustomTerrain : MonoBehaviour
                 }
             }
 
+            // square step
             for (int x = 0; x < width; x += squareSize)
             {
                 for (int y = 0; y < width; y += squareSize)

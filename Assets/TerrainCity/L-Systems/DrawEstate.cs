@@ -109,7 +109,9 @@ namespace DefaultNamespace
 
             foreach (KeyValuePair<Vector2, Quaternion> edge in VoronoiRoads.edges)
             {
-                iterations = UnityEngine.Random.Range(3, 15);
+                //iterations = UnityEngine.Random.Range(3, 6);
+                iterations = 8;
+                
                 StringBuilder sb = new StringBuilder();
                 if (UnityEngine.Random.Range(1, 2) == 0)
                 {
@@ -156,14 +158,10 @@ namespace DefaultNamespace
                     iterations--;
                 }
 
-                
-
-                lSystem.DrawSystem();
-
-                
+                lSystem.DrawSystem();                
             }
             Timer.Stop();
-            UnityEngine.Debug.Log("Time taken to draw System: " + Timer.Elapsed);
+            UnityEngine.Debug.Log("Time taken to draw all L-Systems: " + Timer.Elapsed);
         }
 
         // string builder for grid-like roads
@@ -281,28 +279,58 @@ namespace DefaultNamespace
         StringBuilder RoundaboutAxiom(StringBuilder sb)
         {
             sb = new StringBuilder();
-            string plusorminus = "";
+            string plusorminusA = ""; 
+            string plusorminusB = "";
+            string plusorminusC = "";
+            string plusorminusD = "";
 
+            plusorminusA = RandomTurnGenerator(plusorminusA);
+            plusorminusB = RandomTurnGenerator(plusorminusB);
+            plusorminusC = RandomTurnGenerator(plusorminusC);
+            plusorminusD = RandomTurnGenerator(plusorminusD);
+
+            int randRoadLength = UnityEngine.Random.Range(0, 4);
+            int randRoadLengthB = UnityEngine.Random.Range(0, 4);
+
+            switch (randRoadLength)
+            {
+                case 0: roundaboutRuleset["C"] = "111111"; break;
+                case 1: roundaboutRuleset["C"] = "11111111"; break;
+                case 2: roundaboutRuleset["C"] = "1111111111"; break;
+                case 3: roundaboutRuleset["C"] = "111111111111"; break;
+            };
+            switch (randRoadLengthB)
+            {
+                case 0: roundaboutRuleset["B"] = "111111"; break;
+                case 1: roundaboutRuleset["B"] = "11111111"; break;
+                case 2: roundaboutRuleset["B"] = "1111111111"; break;
+                case 3: roundaboutRuleset["B"] = "111111111111"; break;
+            }
+
+           // roundaboutRuleset["A"] = "[E]++[D]++D--E" + plusorminus + "A";
+            roundaboutRuleset["A"] = "[E]"+ plusorminusA + "[D]"+ plusorminusB + "D" + plusorminusC + "E" + plusorminusD + "A";
+
+            roundaboutRuleset["D"] = "2p[P2p[" + plusorminusA + "OC[" + plusorminusB + "OC]C[" + plusorminusC + "OC]Co[" + plusorminusD + "OC]]]";
+            sb.Append("AP");
+            roundaboutRuleset["E"] = "Bo[" + plusorminusD + "OB[" + plusorminusC + "OB]Bo[" + plusorminusB + "OB]]OBo[" + plusorminusA + "OB]";
+            return sb;
+        }
+
+
+        string RandomTurnGenerator(string plusorminus)
+        {
             int randNum = UnityEngine.Random.Range(0, 2);
             switch (randNum)
             {
                 case 0: plusorminus = "--"; break;
                 case 1: plusorminus = "++"; break;
-
-            };
-            int randRoadLength = UnityEngine.Random.Range(0, 2);
-
-            switch (randRoadLength)
-            {
-                case 0: roundaboutRuleset["C"] = "11111"; break;
-                case 1: roundaboutRuleset["C"] = "1111111"; break;
-            };
-
-            roundaboutRuleset["A"] = "[E]++[D]++D--E" + plusorminus + "A";
-            sb.Append("APPPPPPPPPPPPPPPPPPP");
-            return sb;
+                case 2: plusorminus = "----"; break;
+                case 3: plusorminus = "++++"; break;
+            }
+            return plusorminus;
         }
-
     }
+
+  
 }
 

@@ -18,7 +18,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 86
   m_IsActive: 1
 --- !u!4 &468058057082966864
 Transform:
@@ -30,6 +30,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 85.154495, y: 471.57492, z: 185.12077}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5042432069053191893}
   - {fileID: 872733113517353001}
@@ -55,6 +56,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -167,6 +169,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Dead_End_1x1 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 4365564695524921377, guid: 0828b953355624966a4d0daa4c173c0c, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 86
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0828b953355624966a4d0daa4c173c0c, type: 3}
 --- !u!4 &872733113517353001 stripped
@@ -228,6 +234,10 @@ PrefabInstance:
     - target: {fileID: 4365564695524921377, guid: 0828b953355624966a4d0daa4c173c0c, type: 3}
       propertyPath: m_Name
       value: Dead_End_1x1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4365564695524921377, guid: 0828b953355624966a4d0daa4c173c0c, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 86
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0828b953355624966a4d0daa4c173c0c, type: 3}

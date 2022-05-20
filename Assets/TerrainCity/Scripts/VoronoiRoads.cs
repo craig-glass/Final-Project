@@ -2,20 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using System.Diagnostics;
 
 public static class VoronoiRoads
 {
+   static Stopwatch Timer = new Stopwatch();
+
     public static int[,] voronoiMap = null;
     public static Vector2 direction;
     public static List<Quaternion> q;
     public static Dictionary<Vector2, List<Vector2>> roadLocations;
-    public static List<Vector2> testlist;
+    public static List<Vector2> roadpoints;
     public static Dictionary<Vector2, Quaternion> edges;
 
 
     public static Dictionary<int, Vector2Int> locations = new Dictionary<int, Vector2Int>();
     public static void GenerateVoronoi(int numDistricts, int startPos, int width, int height)
     {
+        Timer.Start();
+
         voronoiMap = new int[width, height];
 
         roadLocations = new Dictionary<Vector2, List<Vector2>>();
@@ -85,10 +90,10 @@ public static class VoronoiRoads
                 {
                     if (firstIteration && roadPlacement != voronoiMap[x, y])
                     {
-                        testlist = new List<Vector2>();
+                        roadpoints = new List<Vector2>();
                         edges = new Dictionary<Vector2, Quaternion>();
 
-                        roadLocations.Add(new Vector2(roadPlacement, voronoiMap[x, y]), testlist);
+                        roadLocations.Add(new Vector2(roadPlacement, voronoiMap[x, y]), roadpoints);
 
                         direction = locations[roadPlacement] - locations[voronoiMap[x, y]];
 
@@ -101,10 +106,10 @@ public static class VoronoiRoads
                   
                     if (!roadLocations.ContainsKey(new Vector2(roadPlacement, voronoiMap[x, y])) && roadPlacement != voronoiMap[x, y])
                     {
-                        testlist = new List<Vector2>();
-                        testlist.Add(new Vector2(x, y));
+                        roadpoints = new List<Vector2>();
+                        roadpoints.Add(new Vector2(x, y));
                         
-                        roadLocations.Add(new Vector2(roadPlacement, voronoiMap[x, y]), testlist);
+                        roadLocations.Add(new Vector2(roadPlacement, voronoiMap[x, y]), roadpoints);
 
                         direction = locations[roadPlacement] - locations[voronoiMap[x, y]];
 
@@ -139,5 +144,7 @@ public static class VoronoiRoads
                 }
             }
         }
+
+        Timer.Stop();
     }
 }

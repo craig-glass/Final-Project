@@ -15,6 +15,7 @@ public class MoveBuilding : MonoBehaviour
     {
         Vector3 position = transform.position;
         position.y = terrain.SampleHeight(transform.position);
+        position.y += (transform.localScale.y / 2) - (transform.localScale.y / 4);
         transform.position = position;
     }
 

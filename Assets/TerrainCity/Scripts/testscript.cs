@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class testscript : MonoBehaviour
 {
-    List<Vector2> testlist;
+    List<Vector2> roadpoints;
     Dictionary<Vector2, List<Vector2>> roadLocations;
 
     // Start is called before the first frame update
@@ -21,14 +21,14 @@ public class testscript : MonoBehaviour
             }
         }
 
-        //int testlistcount = 0;
-        //while (testlistcount < testlist.Count)
+        //int roadpointscount = 0;
+        //while (roadpointscount < roadpoints.Count)
         //{
-        //    for (int i = 0; i < testlist[testlistcount].Count; i++)
+        //    for (int i = 0; i < roadpoints[roadpointscount].Count; i++)
         //    {
-        //        UnityEngine.Debug.Log("testlist[" + testlistcount + "][" + i + "] = " + testlist[testlistcount][i]);
+        //        UnityEngine.Debug.Log("roadpoints[" + roadpointscount + "][" + i + "] = " + roadpoints[roadpointscount][i]);
         //    }
-        //    testlistcount++;
+        //    roadpointscount++;
         //}
 
     }
@@ -53,18 +53,18 @@ public class testscript : MonoBehaviour
             {
                 if (x == 0 || x == 2)
                 {
-                    testlist = new List<Vector2>();
-                    testlist.Add(new Vector2(11,22));
+                    roadpoints = new List<Vector2>();
+                    roadpoints.Add(new Vector2(11,22));
                 }
                 else
                 {
-                    testlist = new List<Vector2>();
-                    testlist.Add(new Vector2(x, z));
+                    roadpoints = new List<Vector2>();
+                    roadpoints.Add(new Vector2(x, z));
                 }
 
                 
             }
-            roadLocations.Add(new Vector2(x, 0), testlist);
+            roadLocations.Add(new Vector2(x, 0), roadpoints);
         }
         
     }

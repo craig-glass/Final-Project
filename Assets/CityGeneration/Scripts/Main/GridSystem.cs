@@ -25,7 +25,6 @@ public class GridSystem : MonoBehaviour
             {
                 Vector3 pos = new Vector3(x, 0, z);
                 GameObject r = Instantiate(crossroads, pos, Quaternion.identity);
-                pos.z += 10;
 
                 //r = Instantiate(straight, pos, Quaternion.identity);
 

@@ -20,6 +20,8 @@ class RoadPiece : IEquatable<RoadPiece>
     }
 }
 
+[RequireComponent(typeof(MeshFilter))]
+[RequireComponent(typeof(MeshRenderer))]
 public class CityGenerator : MonoBehaviour
 {
     Stopwatch Timer = new Stopwatch();
@@ -40,7 +42,6 @@ public class CityGenerator : MonoBehaviour
     public GameObject[] fillers;
     public GameObject[] trees;
     public GameObject park;
-
 
     public enum PieceType { ROAD, HOUSE, SHACK, LAWN, COMMERCIAL, INDUSTRY, PARK, NONE };
     public Dictionary<Vector3Int, PieceType> citymap = new Dictionary<Vector3Int, PieceType>();
@@ -333,21 +334,24 @@ public class CityGenerator : MonoBehaviour
                 {
                     //if (UnityEngine.Random.Range(0, 5000) == 0 && !OutsideMap(pos))
                     //{
-                        
+
                     //    go = Instantiate(park, pos, Quaternion.identity);
                     //    pt = PieceType.PARK;
                     //}
                     if (density < 0.464f)
                     {
-                        go = Instantiate(residentialSmall[UnityEngine.Random.Range(0, residentialSmall.Length)], pos, Quaternion.identity);
+                        go = Instantiate(residentialSmall[UnityEngine.Random.Range(0, residentialSmall.Length)], pos, Quaternion.identity, transform);
+                        go.SetActive(false);
                     }
                     else if (density < 0.623f)
                     {
                         go = Instantiate(residentialMedium[UnityEngine.Random.Range(0, residentialMedium.Length)], pos, Quaternion.identity);
+                        go.SetActive(false);
                     }
                     else
                     {
                         go = Instantiate(residentialLarge[UnityEngine.Random.Range(0, residentialLarge.Length)], pos, Quaternion.identity);
+                        go.SetActive(false);
                     }
                     pt = PieceType.HOUSE;
                 }
@@ -359,14 +363,17 @@ public class CityGenerator : MonoBehaviour
                     if (density < 0.464f)
                     {
                         go = Instantiate(commercialSmall[UnityEngine.Random.Range(0, commercialSmall.Length)], pos, Quaternion.identity);
+                        go.SetActive(false);
                     }
                     else if (density < 0.623f)
                     {
                         go = Instantiate(commercialMedium[UnityEngine.Random.Range(0, commercialMedium.Length)], pos, Quaternion.identity);
+                        go.SetActive(false);
                     }
                     else
                     {
                         go = Instantiate(commercialLarge[UnityEngine.Random.Range(0, commercialLarge.Length)], pos, Quaternion.identity);
+                        go.SetActive(false);
                     }
 
                     pt = PieceType.COMMERCIAL;
@@ -374,6 +381,7 @@ public class CityGenerator : MonoBehaviour
                 else
                 {
                     go = Instantiate(industrial[UnityEngine.Random.Range(0, industrial.Length)], pos, Quaternion.identity);
+                    go.SetActive(false);
                     pt = PieceType.INDUSTRY;
                 }
 
@@ -467,6 +475,10 @@ public class CityGenerator : MonoBehaviour
         AddFillers(0, ZoneType.R);
         AddFillers(1, ZoneType.C);
         AddFillers(2, ZoneType.I);
+        
+
+        StaticBatchingUtility.Combine(transform.gameObject);
+
 
         MethodTimer.Stop();
         UnityEngine.Debug.Log("Build houses time taken: " + MethodTimer.Elapsed);
@@ -593,4 +605,6 @@ public class CityGenerator : MonoBehaviour
         Timer.Stop();
         UnityEngine.Debug.Log("AddFillers time taken: " + Timer.Elapsed);
     }
+
+
 }

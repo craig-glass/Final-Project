@@ -227,14 +227,14 @@ MonoBehaviour:
   perlinOctaves: 2
   perlinPersistance: -2.11
   perlinHeightScale: 0.752
-  fallOff: 2.5
-  dropOff: 2.11
+  fallOff: 9.9
+  dropOff: 3.27
   peakCount: 10
   minHeight: 0
-  maxHeight: 1
+  maxHeight: 0.548
   voronoiType: 3
-  roughness: 6.59
-  heightDampenerPower: 1.08
+  roughness: 4.71
+  heightDampenerPower: 1.15
   smoothAmount: 1
   perlinParameters:
   - mPerlinXScale: 0.006
@@ -618,8 +618,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.16372004, y: 0.37146288, z: -0.066720076, w: 0.91146016}
-  m_LocalPosition: {x: -1115.88, y: 1766.23, z: -1184.56}
+  m_LocalRotation: {x: 0.18840653, y: 0.67237645, z: -0.18305577, w: 0.6920286}
+  m_LocalPosition: {x: -1394.8713, y: 2318.0415, z: 2557.4448}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

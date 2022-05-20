@@ -37,7 +37,7 @@ public class GenerateCubes : MonoBehaviour
             for (int y = 10; y < quantity; y+= 20)
             {
                 GameObject go = GameObject.CreatePrimitive(PrimitiveType.Cube);
-
+                go.AddComponent<MoveBuilding>();
 
                 Renderer r = go.GetComponent<Renderer>();
                 if (MeshUtils.voronoiMap[x, y] < 15)

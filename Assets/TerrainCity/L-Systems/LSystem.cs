@@ -4,6 +4,7 @@ using UnityEngine;
 using System;
 using DefaultNamespace;
 using System.Text;
+using System.Diagnostics;
 
 /*
  * axiom = F
@@ -14,6 +15,8 @@ using System.Text;
 
 public class LSystem
 {
+    Stopwatch Timer = new Stopwatch();
+
     string sentence;
     Dictionary<string, string> ruleset;
     Dictionary<string, Action<Turtle>> turtleCommands;
@@ -30,6 +33,8 @@ public class LSystem
 
     public void DrawSystem()
     {
+        Timer.Start();
+
         foreach (var instruction in sentence)
         {
             if (turtleCommands.TryGetValue(instruction.ToString(), out var command))
@@ -40,6 +45,8 @@ public class LSystem
                // yield return new WaitForSeconds(0.5f);
             }
         }
+        Timer.Stop();
+        UnityEngine.Debug.Log("DrawSystem time taken: " + Timer.Elapsed);
     }
 
     public string GenerateSentence()

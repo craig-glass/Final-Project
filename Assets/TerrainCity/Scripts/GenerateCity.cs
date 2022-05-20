@@ -34,7 +34,7 @@ public class GenerateCity : MonoBehaviour
 
     private void Awake()
     {
-        
+
         UnityEngine.Debug.Log("Initializing Terrain Data");
         terrain = GetComponent<Terrain>();
         terrainData = Terrain.activeTerrain.terrainData;
@@ -42,9 +42,9 @@ public class GenerateCity : MonoBehaviour
         //MidPointDisplacement();
         Perlin();
         //SmoothTerrain();
-        
+
         StartCoroutine(GenerateRoads());
-        
+
 
     }
 
@@ -169,6 +169,7 @@ public class GenerateCity : MonoBehaviour
         terrainData.SetHeights(0, 0, heightMap);
         Timer.Stop();
         UnityEngine.Debug.Log("Time taken for perlin: " + Timer.Elapsed);
+        Timer.Reset();
     }
 
     public void SmoothTerrain()
@@ -243,8 +244,10 @@ public class GenerateCity : MonoBehaviour
 
     IEnumerator GenerateRoads()
     {
-        int startPos = Random.Range(0, 1000);
-        int endPos = startPos + 2000;
+        Timer.Start();
+
+        int startPos = 1000;
+        int endPos = startPos + 5000;
 
 
         VoronoiRoads.GenerateVoronoi(9, startPos, endPos, endPos);
@@ -262,7 +265,6 @@ public class GenerateCity : MonoBehaviour
             else
             {
                 Instantiate(roundabout, new Vector3(val.Value[0].x, 50, val.Value[0].y), Quaternion.identity);
-
 
                 //    foreach (KeyValuePair<Vector2, List<Vector2>> otherVal in VoronoiRoads.roadLocations)
                 //    {
@@ -303,7 +305,8 @@ public class GenerateCity : MonoBehaviour
         }
 
         //InstantiateVoronoiPoints(VoronoiRoads.locations);
-
+        Timer.Stop();
+        Timer.Reset();
         yield return null;
     }
 
